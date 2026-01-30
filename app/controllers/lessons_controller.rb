@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update ]
- 
+
   # GET /lessons/1 or /lessons/1.json
   def show
     @course = @lesson.course
