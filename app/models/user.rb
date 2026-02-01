@@ -5,4 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   has_many :lesson_users
   has_many :course_users
-end 
+end

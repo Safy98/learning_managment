@@ -7,13 +7,13 @@ class LessonsController < ApplicationController
   # GET /lessons/1 or /lessons/1.json
   def show
     @course = @lesson.course
-    @completed_lessons = current_user.lesson_users.where(completed:true).pluck(:lesson_id)
+    @completed_lessons = current_user.lesson_users.where(completed: true).pluck(:lesson_id)
     @paid_for_course = current_user.course_users.where(course: @course).exists?
   end
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
   def update
-   @lesson_user = LessonUser.find_or_create_by(user: current_user,lesson: @lesson)
+   @lesson_user = LessonUser.find_or_create_by(user: current_user, lesson: @lesson)
    @lesson_user.update!(completed: true)
    next_lesson = @course.lessons.where("position > ?", @lesson.position).order(:position).first
    if next_lesson

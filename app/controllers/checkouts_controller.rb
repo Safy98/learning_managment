@@ -5,14 +5,14 @@ class CheckoutsController < ApplicationController
   Stripe.api_key = stripe_secret_key
 
   def create
-    course = Course.find(params[:course_id])  
+    course = Course.find(params[:course_id])
 
     session = Stripe::Checkout::Session.create(
       mode: "payment",
-      line_items: [{ 
+      line_items: [ {
         price: course.stripe_price_id,
-        quantity: 1,
-      }],
+        quantity: 1
+      } ],
       success_url: request.base_url + "/courses/#{course.id}",
       cancel_url: request.base_url + "/courses/#{course.id}",
       automatic_tax: { enabled: false },

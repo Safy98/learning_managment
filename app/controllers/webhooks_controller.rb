@@ -5,7 +5,7 @@ class WebhooksController < ApplicationController
     stripe_secret_key = Rails.application.credentials.dig(:stripe, :secret_key)
     Stripe.api_key = stripe_secret_key
     payload = request.body.read
-    sig_header = request.env['HTTP_STRIPE_SIGNATURE']
+    sig_header = request.env["HTTP_STRIPE_SIGNATURE"]
     endpoint_secret = Rails.application.credentials.dig(:stripe, :webhook_secret)
     event = nil
 
@@ -26,7 +26,7 @@ class WebhooksController < ApplicationController
       puts "session hi safi: #{session}"
       full_session = Stripe::Checkout::Session.retrieve({
         id: session.id,
-        expand: ['line_items'],
+        expand: [ "line_items" ]
       })
 
       line_items = full_session.line_items
@@ -41,6 +41,6 @@ class WebhooksController < ApplicationController
       puts "Unhandled event type: #{event.type}"
     end
 
-    render json: { message: 'success' }
+    render json: { message: "success" }
   end
 end
