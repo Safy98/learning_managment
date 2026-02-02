@@ -1,9 +1,9 @@
 class Lesson < ApplicationRecord
   belongs_to :course
   has_one_attached :video do |attachable|
-    attachable.variant :thumb, resize_to_limit: [500,500]
+    attachable.variant :thumb, resize_to_limit: [ 500, 500 ]
   end
-  
+
   has_many :lesson_users, dependent: :destroy
 
   def next_lesson
