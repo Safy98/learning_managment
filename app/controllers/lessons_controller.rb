@@ -10,7 +10,6 @@ class LessonsController < ApplicationController
     @course = @lesson.course
     @completed_lessons = current_user&.lesson_users&.where(completed: true)&.pluck(:lesson_id)
     @paid_for_course = current_user.course_users.where(course: @course).exists?
-
   end
 
   # PATCH/PUT /lessons/1 or /lessons/1.json
@@ -23,7 +22,6 @@ class LessonsController < ApplicationController
     else
       redirect_to course_path(@course), notice: "You have completed the course"
     end
-
   end
 
 
