@@ -1,21 +1,19 @@
 class Admin::LessonsController < AdminController
   before_action :set_course
-  before_action :set_lesson, only: [:move, :show, :edit, :update, :destroy]
+  before_action :set_lesson, only: [ :move, :show, :edit, :update, :destroy ]
 
   def index
     @admin_lessons = @admin_course.lessons.order(:position)
   end
 
   def new
-    @admin_lesson = @admin_course.lessons.new 
+    @admin_lesson = @admin_course.lessons.new
   end
 
   def show
-    
   end
 
   def edit
-    
   end
 
   def update
@@ -70,5 +68,4 @@ class Admin::LessonsController < AdminController
   def set_lesson
     @admin_lesson = Lesson.find(params[:id])
   end
-
 end
