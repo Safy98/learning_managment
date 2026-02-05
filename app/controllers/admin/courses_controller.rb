@@ -33,7 +33,7 @@ class Admin::CoursesController < AdminController
       redirect_to admin_courses_path
     else
       render :edit
-  end
+    end
 end
 
   private
