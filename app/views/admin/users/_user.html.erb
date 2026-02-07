@@ -1,2 +1,7 @@
-<div id="<%= dom_id user %>">
-</div>
+<article id="<%= dom_id user %>" class="content-card min-w-80">
+  <h2 class="text-lg font-bold text-gray-900"><%= user.email %></h2>
+  <div class="mt-2 text-sm text-gray-600">
+    <p><span class="font-semibold text-gray-700">Created:</span> <%= user.created_at.to_formatted_s(:long) %></p>
+    <p><span class="font-semibold text-gray-700">Updated:</span> <%= user.updated_at.to_formatted_s(:long) %></p>
+  </div>
+</article>

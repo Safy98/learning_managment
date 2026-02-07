@@ -1,8 +1,11 @@
 <div class="flex flex-col w-full items-center justify-start">
-  <p style="color: green"><%= notice %></p>
+  <% if notice.present? %>
+    <p class="ui-notice"><%= notice %></p>
+  <% end %>
+
   <%= render @admin_course %>
-  <div class="mt-4 flex gap-4">
-    <%= link_to "Back to courses", admin_courses_path %>
-    <%= button_to "Destroy this course", [:admin, @admin_course], method: :delete, data: {'turbo-confirm': "Are you sure?" } %>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <%= link_to "Back to courses", admin_courses_path, class: "ui-btn ui-btn-secondary" %>
+    <%= button_to "Destroy this course", [:admin, @admin_course], method: :delete, data: { "turbo-confirm": "Are you sure?" }, class: "ui-btn ui-btn-danger cursor-pointer" %>
   </div>
 </div>

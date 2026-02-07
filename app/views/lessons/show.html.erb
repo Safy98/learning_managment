@@ -1,21 +1,24 @@
-<div class="mx-auto w-full flex-col lg:flex-row-reverse justify-start lg:justify-end pb-6 flex md:w-2/3">
-  <div>
+<div class="mx-auto flex w-full flex-col gap-6 pb-6 lg:flex-row-reverse">
+  <div class="w-full space-y-4">
     <div>
       <% if notice.present? %>
-        <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+        <p class="ui-notice" id="notice"><%= notice %></p>
       <% end %>
     </div>
-    <%= (@lesson.video.present?) ? video_tag(@lesson.video, controls: true, class: " rounded") : content_tag(:div, "No video available", class: "text-center text-gray-500") %>
-    <div class="my-2 border p-4 rounded">
-      <h1 class="text-2xl font-semibold"><%= @lesson.title %></h1>
-      <p class="text-gray-700"><%= @lesson.description %></p>
+
+    <%= (@lesson.video.present?) ? video_tag(@lesson.video, controls: true, class: "w-full rounded-2xl border border-brown-200 bg-black/90 shadow-md") : content_tag(:div, "No video available", class: "content-card text-center text-gray-500") %>
+
+    <div class="content-card">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900"><%= @lesson.title %></h1>
+      <p class="mt-2 leading-relaxed text-gray-600"><%= @lesson.description %></p>
     </div>
+
     <div class="my-6 lg:mb-0">
-      <%= link_to "Mark as complete", course_lesson_path(@course, @lesson), data: { 'turbo-method' => :put }, class: "bg-green-500 rounded hover:bg-green-600 text-white-50 px-4 py-2" %>
+      <%= link_to "Mark as complete", course_lesson_path(@course, @lesson), data: { "turbo-method" => :put }, class: "ui-btn bg-green-600 text-white-50 hover:bg-green-700" %>
     </div>
   </div>
-  <div class="sidebar_container lg:min-w-60 lg:mr-4 lg:overflow-y-scroll">
 
+  <div class="sidebar_container w-full lg:min-w-72 lg:max-w-sm lg:overflow-y-auto">
     <%= render "sidebar", course: @course, completed_lessons: @completed_lessons, paid_for_course: @paid_for_course %>
   </div>
 </div>

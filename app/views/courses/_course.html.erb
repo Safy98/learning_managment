@@ -1,35 +1,36 @@
-<div id="<%= dom_id course %>" class="max-w-sm rounded-b overflow-hidden shadow-lg hover:bg-voodoo-100">
-  <%= link_to course, class: "flex flex-col h-full" do %>
+<article id="<%= dom_id course %>" class="overflow-hidden rounded-2xl border border-brown-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+  <%= link_to course, class: "flex h-full flex-col" do %>
     <% if course.image.present? %>
-      <%= image_tag course.image, class: "w-full rounded-t" %>
+      <%= image_tag course.image, class: "h-52 w-full object-cover" %>
     <% else %>
-      <%= image_tag("https://via.placeholder.com/380x220") %>
+      <%= image_tag "https://via.placeholder.com/380x220", class: "h-52 w-full object-cover" %>
     <% end %>
-    <div class="px-6 py-4 flex flex-col justify-between grow">
+
+    <div class="flex grow flex-col justify-between p-5">
       <div>
-        <div class="flex items-center justify-between font-bold text-xl mb-2">
-          <%= course.title %>
-          <% if user_unlocked_courses&.include? course.id %>
-            <span class="ml-2 text-white-50 text-xs px-2 py-1 rounded bg-green-500">Unlocked</span>
+        <div class="mb-2 flex items-start justify-between gap-3">
+          <h2 class="text-xl font-bold text-gray-900"><%= course.title %></h2>
+          <% if user_unlocked_courses&.include?(course.id) %>
+            <span class="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">Unlocked</span>
           <% end %>
         </div>
-        <p class="text-sm font-extralight">Conner Jensen
-          <p>
-            <div>
-              <p class="text-md font-light"><%= course.paid ? "Premium Content" : "Free" %></p>
-            </div>
+        <p class="text-sm text-gray-500">Conner Jensen</p>
+        <p class="mt-2 text-sm font-semibold text-amaranth-800"><%= course.paid ? "Premium Content" : "Free" %></p>
+      </div>
+
+      <% if user_started_courses&.include?(course.id) %>
+        <% user_completed_percentage = user_course_progresses.find { |cp| cp[:course_id] == course.id }[:completed_percentage] %>
+        <div class="mt-5">
+          <div class="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-500">Progress</div>
+          <div class="relative h-3 overflow-hidden rounded-full bg-brown-100">
+            <% if user_completed_percentage == 100 %>
+              <div class="absolute h-full rounded-full bg-green-500 text-center text-[10px] font-semibold leading-3 text-white-50" style="width: 100%">Done</div>
+            <% else %>
+              <div class="absolute h-full rounded-full bg-green-500 text-center text-[10px] font-semibold leading-3 text-white-50" style="width: <%= user_completed_percentage %>%"><%= user_completed_percentage %>%</div>
+            <% end %>
           </div>
-          <% if user_started_courses&.include? course.id %>
-            <% user_completed_percentage = user_course_progresses.find{|cp| cp[:course_id] == course.id}[:completed_percentage] %>
-            <div class="mt-2 h-4 relative rounded-full overflow-hidden">
-              <div class="w-full h-full bg-gray-200 absolute"></div>
-              <% if user_completed_percentage == 100 %>
-                <div class="h-full bg-green-500 absolute text-white-50 text-center text-xs" style="width:100%">Completed</div>
-              <% else %>
-                <div class="h-full bg-green-500 absolute text-white-50 text-center text-xs" style="width:<%= user_completed_percentage %>%"><%= user_completed_percentage%>%</div>
-              <% end %>
-            </div>
-          <% end %>
         </div>
       <% end %>
     </div>
+  <% end %>
+</article>

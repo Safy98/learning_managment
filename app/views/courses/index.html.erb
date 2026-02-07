@@ -1,8 +1,14 @@
 <div class="w-full">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+    <p class="ui-notice" id="notice"><%= notice %></p>
   <% end %>
-  <div id="courses" class="min-w-full flex flex-wrap justify-center gap-14 pb-6">
+
+  <div class="mb-6">
+    <h1 class="page-title">Courses</h1>
+    <p class="page-subtitle">Explore guided tracks and continue where you left off.</p>
+  </div>
+
+  <div id="courses" class="grid grid-cols-1 gap-6 pb-6 sm:grid-cols-2 xl:grid-cols-3">
     <%= render @courses, { user_started_courses: @user_started_courses, user_course_progresses: @user_course_progresses, user_unlocked_courses: @user_unlocked_courses } %>
   </div>
 </div>

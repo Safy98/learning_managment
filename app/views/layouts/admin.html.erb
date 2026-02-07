@@ -26,8 +26,10 @@
     </head>
     <body>
       <%= render "admin/navbar" %>
-      <main class="container mx-auto min-h-screen px-4 md:px-0 mt-4 flex">
-        <%= yield %>
+      <main class="app-shell">
+        <section class="app-panel">
+          <%= yield %>
+        </section>
       </main>
     </body>
   </html>

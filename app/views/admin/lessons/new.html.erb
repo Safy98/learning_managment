@@ -1,7 +1,11 @@
 <div class="flex flex-col justify-start items-center w-full">
-  <%= render "form", admin_lesson: @admin_lesson %>
-  <br>
-  <div>
-    <%= link_to "Back to lessons", admin_course_lessons_path %>
+  <div class="w-full max-w-3xl">
+    <h1 class="page-title mb-5">New Lesson</h1>
+    <div class="content-card">
+      <%= render "form", admin_lesson: @admin_lesson %>
+    </div>
+    <div class="mt-4">
+      <%= link_to "Back to lessons", admin_course_lessons_path, class: "ui-btn ui-btn-secondary" %>
+    </div>
   </div>
 </div>

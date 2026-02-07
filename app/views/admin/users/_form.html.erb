@@ -1,15 +1,31 @@
 <%= form_with(model: admin_user) do |form| %>
   <% if admin_user.errors.any? %>
-    <div style="color: red">
+    <div class="ui-alert">
       <h2><%= pluralize(admin_user.errors.count, "error") %> prohibited this admin_user from being saved:</h2>
-      <ul>
+      <ul class="ml-5 list-disc">
         <% admin_user.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
+
+  <div class="ui-input-row">
+    <%= form.label :email, class: "ui-label" %>
+    <%= form.email_field :email, class: "w-full" %>
+  </div>
+
+  <div class="ui-input-row">
+    <%= form.label :password, class: "ui-label" %>
+    <%= form.password_field :password, class: "w-full", autocomplete: "new-password" %>
+  </div>
+
+  <div class="ui-input-row">
+    <%= form.label :password_confirmation, class: "ui-label" %>
+    <%= form.password_field :password_confirmation, class: "w-full", autocomplete: "new-password" %>
+  </div>
+
   <div>
-    <%= form.submit %>
+    <%= form.submit class: "ui-btn ui-btn-primary cursor-pointer" %>
   </div>
 <% end %>
