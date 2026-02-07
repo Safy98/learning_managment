@@ -3,5 +3,5 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   # Changes to the importmap will invalidate the etag for HTML responses
-  stale_when_importmap_changes
+  etag { Rails.root.join("config/importmap.rb").mtime.to_i }
 end
