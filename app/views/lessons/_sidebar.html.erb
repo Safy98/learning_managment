@@ -1,17 +1,17 @@
-<div class="w-full">
+<div class="w-full overflow-hidden rounded-2xl border border-brown-200 bg-white shadow-md">
   <% course.lessons.order(:position).each do |lesson| %>
     <% if lesson.paid && !paid_for_course %>
-      <div class="border p-6 hover:bg-gray-200">
-        <div>
-          <%= icon('fa-solid', 'lock', class: "mr-2 text-gray-600") %>
-          <span class="font-light"><%= lesson.title %></span>
+      <div class="border-b border-brown-100 p-4 last:border-b-0 hover:bg-orange-50">
+        <div class="flex items-center">
+          <%= icon("fa-solid", "lock", class: "mr-2 text-gray-500") %>
+          <span class="font-medium text-gray-700"><%= lesson.title %></span>
         </div>
       </div>
     <% else %>
       <%= link_to course_lesson_path(course, lesson) do %>
-        <div class="border p-6 hover:bg-gray-200 <%= @lesson.id == lesson.id ? 'bg-amaranth-100': '' %>">
-          <%= completed_lessons&.include?(lesson.id) ? icon('fa-solid', 'check-circle', class: "mr-2 text-green-500") : nil %>
-          <span class="font-light"><%= lesson.title %></span>
+        <div class="border-b border-brown-100 p-4 last:border-b-0 hover:bg-orange-50 <%= @lesson.id == lesson.id ? 'bg-amaranth-50' : '' %>">
+          <%= completed_lessons&.include?(lesson.id) ? icon("fa-solid", "check-circle", class: "mr-2 text-green-600") : nil %>
+          <span class="font-medium text-gray-700"><%= lesson.title %></span>
         </div>
       <% end %>
     <% end %>

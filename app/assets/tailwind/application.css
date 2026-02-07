@@ -123,3 +123,158 @@
   --color-revolver-900: #5b3778;
   --color-revolver-950: #311d3f;
 }
+
+@layer base {
+  body {
+    @apply min-h-screen bg-orange-50 text-gray-900 antialiased;
+    background-image: radial-gradient(circle at 10% 0%, #f9d7af 0%, transparent 32%),
+      radial-gradient(circle at 90% 10%, #fad1d5 0%, transparent 28%),
+      linear-gradient(180deg, #fef7ee 0%, #f4f4f2 55%, #fef2f3 100%);
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply rounded-xl border border-brown-200 bg-white/90 px-3 py-2 text-gray-900 shadow-sm;
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    @apply border-amaranth-400 outline-none ring-2 ring-amaranth-200;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply relative mx-auto mt-6 w-full max-w-7xl px-4 pb-8 sm:px-6 lg:px-8;
+  }
+
+  .app-panel {
+    @apply rounded-3xl border border-white/60 bg-white/85 p-4 shadow-xl backdrop-blur-sm sm:p-6;
+  }
+
+  .topbar {
+    @apply sticky top-0 z-40 w-full border-b border-brown-200/70 bg-white/80 backdrop-blur-lg;
+  }
+
+  .topbar-inner {
+    @apply mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8;
+  }
+
+  .topbar-group {
+    @apply flex items-center gap-2;
+  }
+
+  .topbar-link {
+    @apply rounded-xl px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-amaranth-500 hover:text-white-50;
+  }
+
+  .topbar-link-active {
+    @apply bg-amaranth-500 text-white-50;
+  }
+
+  .brand-link {
+    @apply inline-flex items-center gap-2 rounded-xl px-2 py-1;
+  }
+
+  .brand-logo {
+    @apply h-11 w-auto drop-shadow-sm;
+  }
+
+  .mobile-menu {
+    @apply mt-3 flex flex-col gap-2 border-t border-brown-200 pt-3;
+  }
+
+  .page-title {
+    @apply text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl;
+  }
+
+  .page-subtitle {
+    @apply mt-2 text-sm text-gray-600;
+  }
+
+  .ui-notice {
+    @apply mb-4 inline-flex rounded-xl border border-green-300 bg-green-50 px-4 py-2 text-sm font-semibold text-green-700;
+  }
+
+  .ui-alert {
+    @apply mb-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700;
+  }
+
+  .ui-btn {
+    @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold shadow-sm transition-all duration-200;
+  }
+
+  .ui-btn-primary {
+    @apply bg-amaranth-600 text-white-50 hover:bg-amaranth-700;
+  }
+
+  .ui-btn-secondary {
+    @apply bg-gray-100 text-gray-800 hover:bg-gray-200;
+  }
+
+  .ui-btn-accent {
+    @apply bg-camelot-600 text-white-50 hover:bg-camelot-700;
+  }
+
+  .ui-btn-danger {
+    @apply bg-red-600 text-white-50 hover:bg-red-700;
+  }
+
+  .ui-input-row {
+    @apply mb-4 flex flex-col gap-2;
+  }
+
+  .ui-label {
+    @apply text-sm font-semibold text-gray-700;
+  }
+
+  .ui-table-wrap {
+    @apply overflow-x-auto rounded-2xl border border-brown-200 bg-white shadow-sm;
+  }
+
+  .ui-table {
+    @apply min-w-full text-left text-sm;
+  }
+
+  .ui-table thead tr {
+    @apply bg-amaranth-50 text-amaranth-900;
+  }
+
+  .ui-table th {
+    @apply border-b border-amaranth-100 px-5 py-3 font-semibold;
+  }
+
+  .ui-table td {
+    @apply border-b border-brown-100 px-5 py-3 text-gray-700;
+  }
+
+  .ui-table tbody tr:hover {
+    @apply bg-orange-50;
+  }
+
+  .content-card {
+    @apply rounded-2xl border border-brown-200 bg-white p-5 shadow-sm;
+  }
+
+  .auth-shell {
+    @apply mx-auto w-full max-w-lg;
+  }
+
+  .auth-card {
+    @apply rounded-3xl border border-brown-200 bg-white/95 p-6 shadow-xl sm:p-8;
+  }
+
+  .auth-link-list {
+    @apply mt-5 flex flex-col gap-3 text-sm;
+  }
+
+  .auth-link {
+    @apply text-amaranth-700 underline decoration-amaranth-300 underline-offset-4 hover:text-amaranth-900;
+  }
+}

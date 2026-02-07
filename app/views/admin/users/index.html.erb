@@ -1,34 +1,39 @@
 <div class="flex flex-col justify-start items-center w-full">
-  <p style="color: green"><%= notice %></p>
-  <div class="w-full flex flex-col md:flex-row justify-end mb-8">
-    <%= form_with url: admin_users_path, method: :get, class: "flex" do |form| %>
-      <%= form.text_field :query, placeholder: "Search", class: "rounded border-gray-500 text-amaranth-800" %>
-      <%= form.submit "Search", class: "cursor-pointer bg-amaranth-500 ml-2 hover:bg-amaranth-600 text-amaranth-50 py-2 px-4 rounded" %>
+  <% if notice.present? %>
+    <p class="ui-notice"><%= notice %></p>
+  <% end %>
+  <div class="mb-6 w-full">
+    <h1 class="page-title">Users</h1>
+  </div>
+  <div class="mb-8 flex w-full flex-col gap-2 md:flex-row md:justify-end">
+    <%= form_with url: admin_users_path, method: :get, class: "flex gap-2" do |form| %>
+      <%= form.text_field :query, placeholder: "Search", class: "min-w-60" %>
+      <%= form.submit "Search", class: "ui-btn ui-btn-primary cursor-pointer" %>
     <% end %>
     <%= form_with url: admin_users_path, method: :get, class: "flex" do |form| %>
-      <%= form.submit "Clear", class: "cursor-pointer bg-camelot-500 ml-0 md:ml-2 mt-2 md:mt-0 hover:bg-camelot-600 text-amaranth-50 py-2 px-4 rounded" %>
+      <%= form.submit "Clear", class: "ui-btn ui-btn-accent cursor-pointer" %>
     <% end %>
   </div>
-  <div class="w-full overflow-x-auto">
-    <table class="min-w-full bg-amaranth-50" style="border-collapse: separate; border-spacing: 0;">
+  <div class="ui-table-wrap w-full">
+    <table class="ui-table">
       <thead>
-        <tr class="text-amaranth-800">
-          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100"></th>
-          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Email</th>
-          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Created At</th>
-          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Updated At</th>
-          <th class="px-6 py-3 border-b-2 border-amaranth-200 text-start bg-amaranth-100">Destroy User</th>
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Destroy User</th>
         </tr>
       </thead>
-      <tbody class="text-gray-800">
+      <tbody>
         <% @admin_users.each do |user| %>
           <tr>
-            <td class="px-6 py-4 border-b border-gray-200"><%= link_to user.id, admin_user_path(user), class: "underline" %></td>
-            <td class="px-6 py-4 border-b border-gray-200"><%= user.email %></td>
-            <td class="px-6 py-4 border-b border-gray-200"><%= user.created_at.to_formatted_s(:long) %></td>
-            <td class="px-6 py-4 border-b border-gray-200"><%= user.updated_at.to_formatted_s(:long) %></td>
-            <td class="px-6 py-4 border-b border-gray-200">
-              <%= button_to icon('fa-solid', 'trash-can'), [:admin, user], method: :delete, data: {'turbo-confirm': "Are you sure? All their data will be deleted."}, class: "text-red-600" %>
+            <td><%= link_to user.id, admin_user_path(user), class: "font-semibold text-amaranth-700 hover:underline" %></td>
+            <td><%= user.email %></td>
+            <td><%= user.created_at.to_formatted_s(:long) %></td>
+            <td><%= user.updated_at.to_formatted_s(:long) %></td>
+            <td>
+              <%= button_to icon("fa-solid", "trash-can"), [:admin, user], method: :delete, data: { "turbo-confirm": "Are you sure? All their data will be deleted." }, class: "text-red-600 transition-colors hover:text-red-800" %>
             </td>
           </tr>
         <% end %>

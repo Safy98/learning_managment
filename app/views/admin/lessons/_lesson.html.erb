@@ -1,17 +1,18 @@
-<div id="<%= dom_id lesson %>" class="max-w-sm min-w-64 rounded-b overflow-hidden shadow-lg hover:bg-amaranth-100">
+<article id="<%= dom_id lesson %>" class="overflow-hidden rounded-2xl border border-brown-200 bg-white shadow-md transition-colors duration-200 hover:bg-amaranth-50">
   <%= link_to [:admin, @admin_course, lesson] do %>
     <% if lesson.video.present? %>
-      <%= image_tag lesson.video.preview(:thumb), class: "w-full rounded-t" %>
+      <%= image_tag lesson.video.preview(:thumb), class: "h-40 w-full object-cover" %>
     <% else %>
-      <%= image_tag("https://via.placeholder.com/320") %>
+      <%= image_tag "https://via.placeholder.com/320", class: "h-40 w-full object-cover" %>
     <% end %>
-    <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">
+
+    <div class="p-4">
+      <h2 class="text-lg font-bold text-gray-900">
         <% if lesson.paid %>
-          <%= icon('fa-solid', 'lock', class: "mr-2 text-gray-600") %>
+          <%= icon("fa-solid", "lock", class: "mr-2 text-gray-500") %>
         <% end %>
         <%= lesson.title %>
-      </div>
+      </h2>
     </div>
   <% end %>
-</div>
+</article>

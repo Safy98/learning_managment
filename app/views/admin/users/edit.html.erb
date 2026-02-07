@@ -1,8 +1,12 @@
 <% content_for :title, "Editing user" %>
-<h1>Editing user</h1>
-<%= render "form", admin_user: @admin_user %>
-<br>
-<div>
-  <%= link_to "Show this user", @admin_user %> |
-  <%= link_to "Back to users", admin_users_path %>
+
+<div class="mx-auto w-full max-w-2xl">
+  <h1 class="page-title mb-5">Edit User</h1>
+  <div class="content-card">
+    <%= render "form", admin_user: @admin_user %>
+  </div>
+  <div class="mt-4 flex flex-wrap gap-2">
+    <%= link_to "Show this user", @admin_user, class: "ui-btn ui-btn-secondary" %>
+    <%= link_to "Back to users", admin_users_path, class: "ui-btn ui-btn-secondary" %>
+  </div>
 </div>
