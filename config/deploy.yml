@@ -1,13 +1,13 @@
 # Name of your application. Used to uniquely configure containers.
-service: learning_managment
+service: learning_managment_system
 
 # Name of the container image (use your-user/app-name on external registries).
-image: learning_managment
+image: safysrio/learning_managment_system
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 136.243.23.249
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -20,26 +20,27 @@ servers:
 #
 # Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
 #
-# proxy:
-#   ssl: true
-#   host: app.example.com
+proxy:
+  host: 136.243.23.249
 
 # Where you keep your container images.
 registry:
   # Alternatives: hub.docker.com / registry.digitalocean.com / ghcr.io / ...
-  server: localhost:5555
+  # server:  hub.docker.com
 
   # Needed for authenticated registries.
-  # username: your-user
+  username: safysrio
 
   # Always use an access token rather than real password when possible.
-  # password:
-  #   - KAMAL_REGISTRY_PASSWORD
+  password:
+    - KAMAL_REGISTRY_PASSWORD
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
   secret:
     - RAILS_MASTER_KEY
+    - LEARNING_MANAGMENT_DATABASE_PASSWORD
+
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
@@ -49,11 +50,11 @@ env:
     # JOB_CONCURRENCY: 3
 
     # Set number of cores available to the application on each server (default: 1).
-    # WEB_CONCURRENCY: 2
+    WEB_CONCURRENCY: 2
 
     # Match this to any external database server to configure Active Record correctly
     # Use learning_managment-db for a db accessory server on same machine via local kamal docker network.
-    # DB_HOST: 192.168.0.2
+    DB_HOST: learning_managment_system-db
 
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
@@ -68,8 +69,8 @@ aliases:
 
 # Use a persistent storage volume for sqlite database files and local Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
-volumes:
-  - "learning_managment_storage:/rails/storage"
+# volumes:
+#   - "learning_managment_storage:/rails/storage"
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
@@ -78,7 +79,7 @@ asset_path: /rails/public/assets
 
 # Configure the image builder.
 builder:
-  arch: amd64
+  arch: x86_64
 
   # # Build image via remote server (useful for faster amd64 builds on arm64 computers)
   # remote: ssh://docker@docker-builder-server
@@ -91,26 +92,19 @@ builder:
   #   - RAILS_MASTER_KEY
 
 # Use a different ssh user than root
-# ssh:
-#   user: app
+ssh:
+  user: highfiver
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
+accessories:
+  db:
+    image: postgres:16
+    host: 136.243.23.249
+    env:
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
 #   redis:
 #     image: valkey/valkey:8
 #     host: 192.168.0.2

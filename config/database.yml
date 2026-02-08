@@ -88,8 +88,9 @@ production:
   primary: &primary_production
     <<: *default
     database: learning_managment_production
-    username: learning_managment
+    username: postgres
     password: <%= ENV["LEARNING_MANAGMENT_DATABASE_PASSWORD"] %>
+    host: <%= ENV.fetch("DB_HOST", "localhost") %>
   cache:
     <<: *primary_production
     database: learning_managment_production_cache
