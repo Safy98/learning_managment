@@ -4,7 +4,7 @@ class Admin::CoursesController < AdminController
   end
 
   def show
-    @admin_course = Course.find(1)
+    @admin_course = Course.find(params[:id])
   end
 
   def new
@@ -35,6 +35,12 @@ class Admin::CoursesController < AdminController
       render :edit
     end
 end
+
+  def destroy
+    @admin_course = Course.find(params[:id])
+    @admin_course.destroy
+    redirect_to admin_courses_path
+  end
 
   private
 
