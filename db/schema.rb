@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_02_02_122030) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", null: false
@@ -68,8 +71,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_02_122030) do
   end
 
   create_table "categories_courses", force: :cascade do |t|
-    t.integer "category_id"
-    t.integer "course_id"
+    t.bigint "category_id"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_categories_courses_on_category_id"
@@ -77,10 +80,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_02_122030) do
   end
 
   create_table "course_users", force: :cascade do |t|
-    t.integer "course_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["course_id"], name: "index_course_users_on_course_id"
     t.index ["user_id"], name: "index_course_users_on_user_id"
   end
@@ -98,15 +101,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_02_122030) do
   create_table "lesson_users", force: :cascade do |t|
     t.boolean "completed"
     t.datetime "created_at", null: false
-    t.integer "lesson_id", null: false
+    t.bigint "lesson_id", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.index ["lesson_id"], name: "index_lesson_users_on_lesson_id"
     t.index ["user_id"], name: "index_lesson_users_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
-    t.integer "course_id", null: false
+    t.bigint "course_id", null: false
     t.datetime "created_at", null: false
     t.text "description"
     t.boolean "paid"
