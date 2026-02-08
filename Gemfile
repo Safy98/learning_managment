@@ -76,3 +76,6 @@ gem "stripe", "~> 10.3"
 gem "acts_as_list", "~> 0.7.2"
 
 gem "groupdate", "~>6.7"
+
+# Gemfile
+gem "aws-sdk-s3", "~> 1.213", require: false
